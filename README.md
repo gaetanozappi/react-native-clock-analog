@@ -11,7 +11,7 @@
 [![Issue Stats](https://img.shields.io/issuestats/i/github/gaetanozappi/react-native-clock-analog.svg?style=flat&colorB=44cc11)](http://github.com/gaetanozappi/react-native-clock-analog/issues)
 [![github license](https://img.shields.io/github/license/gaetanozappi/react-native-clock-analog.svg)]()
 
-<img src="https://github.com/gaetanozappi/react-native-clock-analog/raw/master/screenshot/react-native-clock-analog.gif" />
+<img src="https://github.com/gaetanozappi/react-native-clock-analog/raw/master/screenshot/react-native-clock-analog.png" />
 
 -   [Usage](#-usage)
 -   [License](#-license)
@@ -24,7 +24,7 @@
 
 ```javascript
 import * as React from 'react';
-import { Text, View, StyleSheet, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 import AnalogClock from 'react-native-clock-analog';
 
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
 | `size`       | `number`   |  `180`  | Clock size.
-| `colorClock`      | `string`   | `rgba(255,255,255,0.8)` | Color color.
-| `colorNumber`      | `string`   | `#fff` | Color number.
-| `colorCenter`      | `string`   |  `#fff` | Color center.
-| `colorHour`      | `string`   | `#fff`  | Color hour.
-| `colorMinutes`      | `string`   | `rgba(255,255,255,0.7)`  | Color minutes.
+| `colorClock`      | `string`   | `rgba(255,255,255,0.8)` | Clock color.
+| `colorNumber`      | `string`   | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff` | Color of the clock numbers.
+| `colorCenter`      | `string`   | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff` | Clock center color.
+| `colorHour`      | `string`   | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff`  | Clock hour hand color.
+| `colorMinutes`      | `string`   | `rgba(255,255,255,0.7)`  | Clock minute hand color.
 | `hour`      | `number`   |  | Hour.
 | `minutes`      | `number`   |  | Minutes.
 

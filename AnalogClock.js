@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class AnalogClock extends React.Component {
@@ -11,17 +11,25 @@ export default class AnalogClock extends React.Component {
       colorCenter,
       colorHour,
       colorMinutes,
+      colorSeconds,
       hour,
       minutes,
+      seconds,
+      showSeconds,
     } = this.props;
     var date = new Date();
     if (!hour) hour = date.getHours();
     hour = hour > 12 ? hour - 12 : hour;
+    
     if (!minutes) minutes = date.getMinutes();
     minutes = minutes / 5;
 
+    if (!seconds) seconds = date.getSeconds();
+    seconds = seconds > 60 ? seconds - 60 : seconds;
+
     var lanHour = size / 6;
     var lanMinutes = size / 3.75;
+    var lanSeconds = size / 3.75;
 
     return (
       <View
@@ -92,12 +100,26 @@ export default class AnalogClock extends React.Component {
             ],
           }}
         />
+        { showSeconds ?
+          <View
+            style={{
+              position: 'absolute',
+              width: lanSeconds,
+              height: 2,
+              borderRadius: 4,
+              backgroundColor: colorSeconds,
+              transform: [
+                { rotate: -90 + seconds * 6 + 'deg' },
+                { translateX: lanSeconds / 2 },
+              ],
+            }}
+          /> : false
+      }
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
 
 AnalogClock.propTypes = {
   size: PropTypes.number,
@@ -106,13 +128,17 @@ AnalogClock.propTypes = {
   colorCenter: PropTypes.string,
   colorHour: PropTypes.string,
   colorMinutes: PropTypes.string,
+  colorSeconds: PropTypes.string,
+  showSeconds: PropTypes.bool
 };
 
 AnalogClock.defaultProps = {
   size: 180,
+  showSeconds: false,
   colorClock: 'rgba(255,255,255,0.8)',
-  colorNumber: '#fff',
-  colorCenter: '#fff',
-  colorHour: '#fff',
+  colorNumber: '#000',
+  colorCenter: '#000',
+  colorHour: '#000',
   colorMinutes: 'rgba(255,255,255,0.7)',
+  colorSeconds: 'red'
 };

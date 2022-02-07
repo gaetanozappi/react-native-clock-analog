@@ -78,13 +78,16 @@ const styles = StyleSheet.create({
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
 | `size`       | `number`   |  `180`  | Clock size.
+| `showSeconds`      | `bool`   | `false` | Show the seconds.
 | `colorClock`      | `string`   | `rgba(255,255,255,0.8)` | Clock color.
-| `colorNumber`      | `string`   | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff` | Color of the clock numbers.
-| `colorCenter`      | `string`   | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff` | Clock center color.
-| `colorHour`      | `string`   | ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `#ffffff`  | Clock hour hand color.
+| `colorNumber`      | `string`   | `#000000` | Color of the clock numbers.
+| `colorCenter`      | `string`   | `#000000` | Clock center color.
+| `colorHour`      | `string`   | `#000000`  | Clock hour hand color.
 | `colorMinutes`      | `string`   | `rgba(255,255,255,0.7)`  | Clock minute hand color.
+| `colorSeconds`      | `string`   | `red`  | Clock second hand color.
 | `hour`      | `number`   |  | Hour.
 | `minutes`      | `number`   |  | Minutes.
+| `seconds`      | `number`   |  | Seconds.
 
 ## 📜 License
 This library is provided under the Apache License.

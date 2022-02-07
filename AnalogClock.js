@@ -18,13 +18,13 @@ export default class AnalogClock extends React.Component {
       showSeconds,
     } = this.props;
     var date = new Date();
-    if (!hour) hour = date.getHours();
+    if (!hour && hour !== 0) hour = date.getHours();
     hour = hour > 12 ? hour - 12 : hour;
-    
-    if (!minutes) minutes = date.getMinutes();
+
+    if (!minutes && minutes !== 0) minutes = date.getMinutes();
     minutes = minutes / 5;
 
-    if (!seconds) seconds = date.getSeconds();
+    if (!seconds && seconds !== 0) seconds = date.getSeconds();
     seconds = seconds > 60 ? seconds - 60 : seconds;
 
     var lanHour = size / 6;
@@ -41,7 +41,7 @@ export default class AnalogClock extends React.Component {
           height: size,
           width: size,
         }}>
-        {[...Array(12).keys()].map(i => {
+        {[...Array(12).keys()].map((i) => {
           let a = -60 + 30 * i;
           let b = 60 - 30 * i;
           return (
@@ -100,7 +100,7 @@ export default class AnalogClock extends React.Component {
             ],
           }}
         />
-        { showSeconds ?
+        {showSeconds && (
           <View
             style={{
               position: 'absolute',
@@ -113,13 +113,12 @@ export default class AnalogClock extends React.Component {
                 { translateX: lanSeconds / 2 },
               ],
             }}
-          /> : false
-      }
+          />
+        )}
       </View>
     );
   }
 }
-
 
 AnalogClock.propTypes = {
   size: PropTypes.number,

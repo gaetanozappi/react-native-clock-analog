@@ -11,7 +11,7 @@
 [![Issue Stats](https://img.shields.io/issuestats/i/github/gaetanozappi/react-native-clock-analog.svg?style=flat&colorB=44cc11)](http://github.com/gaetanozappi/react-native-clock-analog/issues)
 [![github license](https://img.shields.io/github/license/gaetanozappi/react-native-clock-analog.svg)]()
 
-<img src="https://github.com/gaetanozappi/react-native-clock-analog/raw/master/screenshot/react-native-clock-analog.png" />
+https://user-images.githubusercontent.com/20476002/153429759-b280998a-715c-4f39-ab2c-c62ac1d3b6ed.mov
 
 -   [Usage](#-usage)
 -   [License](#-license)
@@ -23,43 +23,65 @@
 ## 💻 Usage
 
 ```javascript
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-
 import AnalogClock from 'react-native-clock-analog';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <ImageBackground
-          source={{
-            uri:
-              'https://i.pinimg.com/originals/62/6f/84/626f84c40696c1308a77fd8331e12b3e.jpg',
-          }}
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 500,
-            width: 500,
-          }}>
-          <AnalogClock
-            size={100}
-          />
-          <View style={{ marginBottom: 5 }} />
-          <AnalogClock
-            colorClock="#2196F3"
-            colorNumber="#000000"
-            colorCenter="#00BCD4"
-            colorHour="#FF8F00"
-            colorMinutes="#FFC400"
-            hour="2"
-            minutes={55}
-          />
-        </ImageBackground>
-      </View>
-    );
-  }
+const nowDate = () => {
+  const d = new Date();
+  let second = d.getSeconds();
+  let minute = d.getMinutes();
+  let hour = d.getHours();
+  return { second, minute, hour };
+};
+
+const nowTimer = () => {
+  const { second, minute, hour } = nowDate();
+  const [state, setState] = useState({
+    second,
+    minute,
+    hour,
+  });
+
+  useEffect(() => {
+    setInterval(() => {
+      const { second, minute, hour } = nowDate();
+      setState({ second, minute, hour });
+    }, 1000);
+  }, [useState]);
+  return state;
+};
+
+export default function App() {
+  const { second, minute, hour } = nowTimer();
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={{
+          uri: 'https://i.pinimg.com/originals/62/6f/84/626f84c40696c1308a77fd8331e12b3e.jpg',
+        }}
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 500,
+          width: 500,
+        }}>
+        <AnalogClock size={100} />
+        <View style={{ marginBottom: 5 }} />
+        <AnalogClock
+          colorClock="#2196F3"
+          colorNumber="#000000"
+          colorCenter="#00BCD4"
+          colorHour="#FF8F00"
+          colorMinutes="#FFC400"
+          hour={hour}
+          minutes={minute}
+          seconds={second}
+          showSeconds
+        />
+      </ImageBackground>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

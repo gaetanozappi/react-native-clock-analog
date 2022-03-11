@@ -3,6 +3,45 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class AnalogClock extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      hour: props.hour,
+      minutes: props.minutes,
+      seconds: props.seconds,
+      autostart: props.autostart,
+      size: props.size,
+      colorClock: props.colorClock,
+      colorNumber: props.colorNumber,
+      colorCenter: props.colorCenter,
+      colorHour: props.colorHour,
+      colorMinutes: props.colorMinutes,
+      colorSeconds: props.colorSeconds,
+      showSeconds: props.showSeconds,
+      ping: false //Used for rendering
+    }
+
+    INTERVAL_CLOCK = null
+  }
+
+  componentDidMount() {
+    if(this.state.autostart && INTERVAL_CLOCK === null) {
+
+      INTERVAL_CLOCK = setInterval(() => {
+        this.setState({
+          ping: true
+        });
+      }, 500);
+    }
+  }
+
+  componentWillUnmount() {
+    if(INTERVAL_CLOCK != null) {
+      clearInterval(INTERVAL_CLOCK);
+    }
+  }
+
   render() {
     let {
       size,
@@ -16,7 +55,7 @@ export default class AnalogClock extends React.Component {
       minutes,
       seconds,
       showSeconds,
-    } = this.props;
+    } = this.state;
     var date = new Date();
     if (!hour && hour !== 0) hour = date.getHours();
     hour = hour > 12 ? hour - 12 : hour;
@@ -82,7 +121,7 @@ export default class AnalogClock extends React.Component {
             borderRadius: 4,
             backgroundColor: colorHour,
             transform: [
-              { rotate: -90 + hour * 30 + 'deg' },
+              { rotate: -90 + ( hour + (minutes / 12)) * 30 + 'deg' },
               { translateX: lanHour / 2 },
             ],
           }}
@@ -128,7 +167,8 @@ AnalogClock.propTypes = {
   colorHour: PropTypes.string,
   colorMinutes: PropTypes.string,
   colorSeconds: PropTypes.string,
-  showSeconds: PropTypes.bool
+  showSeconds: PropTypes.bool,
+  autostart: PropTypes.bool
 };
 
 AnalogClock.defaultProps = {
@@ -139,5 +179,6 @@ AnalogClock.defaultProps = {
   colorCenter: '#000',
   colorHour: '#000',
   colorMinutes: 'rgba(255,255,255,0.7)',
-  colorSeconds: 'red'
+  colorSeconds: 'red',
+  autostart: false
 };
